@@ -1,0 +1,47 @@
+{%extends "base.html"%}
+{%load static%}
+{%block encabezado%}
+<a href="{% url 'escuelas_alta'%}"><img src="{% static 'images/icons8-plus-64.png'%}" alt="" width="40px"></a>
+<style>
+    table{
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
+        
+    }
+    th,td{
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    tr:nth-child(even){
+        background-color: #f2f2f2;
+    }
+    .th-style{
+        background-color: #04AA6D;
+        color: white;
+    }
+</style>
+{%endblock%}
+
+{%block contenido%}
+<table>
+    <tr>
+        <th class="th-style">Acciones</th>
+        <th class="th-style">Nombre</th>
+        <th class="th-style">Siglas</th>
+    </tr>
+    {%for escuela in escuelas%}
+    <tr>
+        <td><a href="{% url 'escuelas_eliminar' escuela.id%}"><img src="/static/images/delete.png" alt=""
+                    width="40px"></a><a href="{% url 'escuelas_editar' escuela.id%}"><img
+                    src="/static/images/modify.png" alt="" width="40px "></a></td>
+
+        <td>{{escuela.nombre}}</td>
+        <td>{{escuela.siglas}}</td>
+    </tr>
+    {%endfor%}
+</table>
+{%endblock%}
