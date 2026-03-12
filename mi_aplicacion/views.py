@@ -4,13 +4,13 @@ from django.views import View
 # Create your views here.
 
 from mi_aplicacion.models import Escuela,Maestro,Alumno
-from mi_aplicacion.forms import EscuelaForm
+from mi_aplicacion.forms import EscuelaForm,MaestroForm
 
 class Home(View):
     def get(self,request):
         cdx={
             "titulo":"Home",
-            "subtitulo":"Bienvenido a mi aplicacion"
+            "subtitulo":"Bienvenidos a mi aplicacion"
 
         }
         return render(request, "home/home.html",cdx)
@@ -20,7 +20,7 @@ class Escuelas(View):
         escuelas = Escuela.objects.all()
         cdx = {
             "titulo":"Escuelas",
-            "subtitulo":"Listado de escuelas",
+            "subtitulo":"Lista de escuelas",
             "escuelas": escuelas
         }
         return render(request, "Escuelas/escuelas.html",cdx)
@@ -95,3 +95,26 @@ class Maestros(View):
             "maestros": maestros
         }
         return render(request, "maestros/maestros.html",cdx)    
+    
+class MaestrosAlta(View): 
+    def get(self, request):
+        form = MaestroForm()
+        return render(request, 'maestros/alta.html',{
+            "subtitulo": "Maestro alta",
+            "titulo": "Maestro alta",
+            "form": form
+        })
+    
+    def post(self, request):
+        form = MaestroForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('maestros')  
+
+        return render(request, 'maestros/alta.html', {
+            "titulo": "Escuela",
+            "form": form,
+            "mensaje": "Error al subir al maestro"
+        })
+

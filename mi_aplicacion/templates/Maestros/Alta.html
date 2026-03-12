@@ -1,22 +1,16 @@
 {%extends "base.html"%}
-
-{%block encabezado%}
-    <title>{{ titulo }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{%block contenido%}
     <style>
-        h1{
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        h1 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
         form {
             border-radius: 5px;
             background-color: #f2f2f2;
             padding: 20px;
             width: 40%;
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
-            
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
-
         label {
             display: block;
         }
@@ -31,7 +25,6 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-
         input[type=submit] {
             width: 100%;
             background-color: #4CAF50;
@@ -46,15 +39,17 @@
         input[type=submit]:hover {
             background-color: #45a049;
         }
+
     </style>
-{%endblock%}
-{%block contenido%}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>
-            {{ form }}
-        </table>
-        <br>
-        <input type="submit" value=Enviar>
-    </form>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{ form }}
+            </table>
+            <br>
+            <input type="submit" value=Hacer>
+        </form>
+    </div>
+
 {%endblock%}
