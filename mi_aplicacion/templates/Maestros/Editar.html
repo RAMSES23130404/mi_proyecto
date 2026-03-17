@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+{% load crispy_forms_tags %}
+
+{%block encabezado%}
+    <title>{{ titulo }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{%endblock%}
+{%block contenido%}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form|crispy }}
+        </table>
+        <br>
+        <input type="submit" value=Enviar>
+    </form>
+{%endblock%}

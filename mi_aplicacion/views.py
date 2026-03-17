@@ -118,3 +118,41 @@ class MaestrosAlta(View):
             "mensaje": "Error al subir al maestro"
         })
 
+class MaestrosEditar(View):
+    def get(self, request, id):
+        maestro = Maestro.objects.filter(id=id).first()
+        form = MaestroForm(instance=maestro)
+        cdx = {
+            "titulo":"Maestro",
+            "subtitulo":"Maestro Editar",
+            "form":form
+        }
+        return render(request, 'maestros/editar.html',cdx)
+    
+    def post(self, request, id):
+        maestro = Maestro.objects.filter(id=id).first()
+        form = MaestroForm(request.POST, request.FILES, instance = maestro)
+        if form.is_valid():
+            form.save()
+            return redirect('maestros')
+        return redirect('home')
+    
+class MaestrosEliminar(View):
+    def get(self, request, id):
+        maestro = Maestro.objects.filter(id=id).first()
+        form = MaestroForm(instance=maestro)
+        cdx = {
+            "titulo":"Maestro",
+            "form":form,
+            "subtitulo":"Maestro Eliminar"
+        }
+        return render(request, 'maestros/editar.html',cdx)
+    
+    def post(self, request, id):
+        maestro = Maestro.objects.filter(id=id).first()
+        form = MaestroForm(request.POST, request.FILES, instance = maestro)
+        if form.is_valid():
+            maestro.delete()
+            return redirect('maestros')
+        return redirect('home') 
+    

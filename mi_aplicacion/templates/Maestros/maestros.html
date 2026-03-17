@@ -38,8 +38,8 @@
     {%for maestro in maestros%}
     <tr>
         <td>
-            <a href=""><img src="/static/images/delete.png" alt="" width="40px"></a>
-            <a href=""><img src="/static/images/modify.png" alt="" width="40px"></a>
+            <a href="{% url 'maestros_eliminar' maestro.id%}"><img src="/static/images/delete.png" alt="" width="40px"></a>
+            <a href="{% url 'maestros_editar' maestro.id%}"><img src="/static/images/modify.png" alt="" width="40px"></a>
         </td>
         <td>{{maestro.nombre}}</td>
         <td>{{maestro.escuela}}</td>
